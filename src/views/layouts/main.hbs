@@ -17,15 +17,15 @@
 
 <body>
 
-  <p>Navigacja</p>
+  {{>navigation}}
 
-  <main class="container">
-
+  <main class="container p-4">
+    {{>errors}}
     {{{body}}}
 
   </main>
 
-  <p>footer</p>
+
 
   <!-- Scritps -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -3,10 +3,12 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const passport = require('passport');
 
 //Initializations
 const app = express();
 require('./database');
+require('./config/passport');
 
 //Settings
 app.set('port', 3000);
@@ -32,8 +34,14 @@ app.use(
     saveUninitialized: true
   })
 );
-//Global Var
 
+app.use(passport.initialize());
+app.use(passport.session());
+//Global Var
+app.use((req, res, next) => {
+  res.locals.user = req.user || null;
+  next();
+});
 //Routes
 
 app.use(require('./routes'));
